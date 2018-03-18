@@ -17,11 +17,17 @@ public class Controller : MonoBehaviour {
 	void Update () {
 		if(!lastPos.Equals(Input.mousePosition)) {
 			if(Input.GetMouseButton(1) && !Input.GetMouseButton(0) && !Input.GetMouseButton(2)) {
-				cam.transform.position += new Vector3(0, 0, -1 * (lastPos - Input.mousePosition)[1] * scrollSpeed);
-			} else if(!Input.GetMouseButton(1) && Input.GetMouseButton(0) && !Input.GetMouseButton(2)) {
-				Vector3 dif = (lastPos - Input.mousePosition) * scrollSpeed;
-				cam.transform.position += new Vector3(dif[0],dif[1], 0);
+				var forward = cam.transform.forward;
+				forward.x = 0f; forward.y = 0f;
+				forward.Normalize();
+				cam.transform.Translate(forward * (lastPos - Input.mousePosition)[1] * scrollSpeed * -1);
 			} else if(!Input.GetMouseButton(1) && !Input.GetMouseButton(0) && Input.GetMouseButton(2)) {
+				var right = cam.transform.right;
+				right.y = 0f; right.Normalize();
+				var up = cam.transform.up;
+				Vector3 dif = (right * (lastPos - Input.mousePosition)[0] + up * (lastPos - Input.mousePosition)[1]) * scrollSpeed;
+				cam.transform.Translate(dif);
+			} else if(!Input.GetMouseButton(1) && Input.GetMouseButton(0) && !Input.GetMouseButton(2)) {
 				Vector3 dif = (lastPos - Input.mousePosition) * sensitivity;
 				cam.transform.Rotate(new Vector3(dif[1], -1 * dif[0], 0));
 			}

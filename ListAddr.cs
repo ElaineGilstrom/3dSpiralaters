@@ -24,4 +24,7 @@ public class ListAddr : MonoBehaviour {
 		compList.RemoveAt(indx);
 	}
 
+	public void quit() {
+		Application.Quit();
+	}
 }

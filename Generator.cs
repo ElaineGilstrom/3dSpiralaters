@@ -122,4 +122,22 @@ public class Generator : MonoBehaviour {
 		drawing = !drawing;
 	}
 
+
+	//Exporting stuffs
+
+	public float expScaleWL;
+	public float expScaleT;
+	public string expFileName;
+
+	public void updateScaleWL(string n) { expScaleWL = float.Parse(n); }
+	public void updateScaleT(string n) { expScaleT = float.Parse(n); }
+	public void updateFileName(string n) { expFileName = n; }
+
+	public void exportOBJ() {
+
+	}
+
+	public void exportMap() {
+			
+	}
 }
